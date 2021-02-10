@@ -1,3 +1,6 @@
+import { requestResources } from "../utils/request-resources.js";
+import { getObjectFromKey } from "../utils/get-object";
+
 export class LoadTemplate extends HTMLElement {
     constructor(){
         super();
