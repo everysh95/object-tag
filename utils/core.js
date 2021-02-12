@@ -15,7 +15,7 @@ function findObjectElement(node,objectID) {
     return objectElement;
 }
 
-export async function reload(rootNode) {
+export async function reloadObject(rootNode) {
     rootNode.querySelectorAll('*[object-id]').forEach(
         (node) => {if(node.tagName != 'SLOT')node.obj = null;}
     );

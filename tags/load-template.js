@@ -1,6 +1,6 @@
 import { requestResources } from "../utils/request-resources.js";
 import { getObjectFromKey } from "../utils/get-object.js";
-import { reload } from "../utils/core.js";
+import { reloadObject } from "../utils/core.js";
 
 export class LoadTemplate extends HTMLElement {
     constructor(){
@@ -29,7 +29,7 @@ export class LoadTemplate extends HTMLElement {
         this.shadowRoot.querySelectorAll("slot").forEach(
             (node) => {
                 node.addEventListener('slotchange',async function(e){
-                    await reload(e.target.getRootNode())
+                    await reloadObject(e.target.getRootNode())
                 });
             }
         )
