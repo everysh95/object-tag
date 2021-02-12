@@ -6,7 +6,7 @@ export class LoadTemplate extends HTMLElement {
     constructor(){
         super();
         this.attachShadow({mode:'open'});
-        this.init();
+        this.pull();
     } 
     setUpAttribute(){
         this.src = this.getAttribute('src');
