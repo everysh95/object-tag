@@ -14,7 +14,7 @@ export class LoadTemplate extends HTMLElement {
         this.router = this.getAttribute('router') ? this.hasAttribute('router') : 'router.json';
         return this.ref || this.src;
     }
-    async init(){
+    async pull(){
         if(!this.setUpAttribute()) return;
         if(this.ref)
         {
