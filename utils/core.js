@@ -9,14 +9,7 @@ function findObjectElement(node,objectID) {
     if(sisterElements.length > 0)
     {
         objectElement = sisterElements[0];
-        if(objectElement.tagName == 'SLOT')
-        {
-
-            objectElement.addEventListener('slotchange',async function(e){
-                await reload(e.target.getRootNode())
-            },{one: true})
-            objectElement = objectElement.assignedElements()[0];
-        }
+        if(objectElement.tagName == 'SLOT') objectElement = objectElement.assignedElements()[0];
     }
     if(!objectElement) objectElement = findObjectElement(node.parentElement,objectID);
     return objectElement;
