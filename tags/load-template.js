@@ -24,6 +24,7 @@ export class LoadTemplate extends HTMLElement {
         }
         const templateText = await (await fetch(this.src)).text();
         this.templateNode = document.importNode(new DOMParser().parseFromString(templateText,'text/html').querySelector('template').content,true);
+        this.shadowRoot.innerHTML = '';
         this.shadowRoot.append(this.templateNode);
         this.shadowRoot.querySelectorAll("slot").forEach(
             (node) => {
