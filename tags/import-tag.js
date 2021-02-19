@@ -1,5 +1,6 @@
 import { getObjectFromKey } from "../utils/get-object.js";
 import { requestResources } from "../utils/request-resources.js";
+import { findObject } from "../utils/core.js";
 
 export class ImportObject extends HTMLElement {
     constructor(){
@@ -8,16 +9,15 @@ export class ImportObject extends HTMLElement {
         this.pull();
     } 
     setUpAttribute(){
+        this.src = this.getAttribute('src');
         this.ref = this.getAttribute('ref');
-        this.router = this.getAttribute('router') ? this.hasAttribute('router') : 'router.json';
         this.param = this.hasAttribute("param") ? this.getAttribute('param') : '';
         this.method = this.hasAttribute("method") ? this.getAttribute('method') : 'GET';
-        return this.ref;
+        return this.src || this.ref;
     }
     async loadObject(){
-        const resources =  await requestResources('GET',this.router);
-        const key = this.ref.split('.');
-        return requestResources(this.method,getObjectFromKey(key,resources));
+        if(this.src) return requestResources(this.method,this.src)
+        else return requestResources(this.method,findObject(this,this.ref));
     }
     async pull(){
         if(!this.setUpAttribute()) return;
