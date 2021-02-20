@@ -17,7 +17,7 @@ export class ImportObject extends HTMLElement {
     }
     async loadObject(){
         if(this.src) return requestResources(this.method,this.src)
-        else return requestResources(this.method,findObject(this,this.ref));
+        else return requestResources(this.method,await findObject(this,this.ref));
     }
     async pull(){
         if(!this.setUpAttribute()) return;

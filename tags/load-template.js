@@ -16,7 +16,7 @@ export class LoadTemplate extends HTMLElement {
     }
     async pull(){
         if(!this.setUpAttribute()) return;
-        if(!this.src) this.src = findObject(this,this.ref);
+        if(!this.src) this.src = await findObject(this,this.ref);
         const templateText = await (await fetch(this.src)).text();
         this.templateNode = document.importNode(new DOMParser().parseFromString(templateText,'text/html').querySelector('template').content,true);
         this.shadowRoot.innerHTML = '';
