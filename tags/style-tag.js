@@ -9,7 +9,7 @@ export class LinkObject extends DefineObject
         {
             this.link = document.createElement('link');
             for (const key of Object.keys(this.obj)) {
-                this.img.setAttribute(`${key}`,`${this.obj[key]}`);
+                this.link.setAttribute(`${key}`,`${this.obj[key]}`);
             }
             this.appendChild(this.link);
         }
@@ -24,7 +24,8 @@ export class StyleObject extends DefineObject
         if(this.obj)
         {
             this.style = document.createElement('style');
-            this.style.innerHTML = `${this.obj}`
+            if(typeof this.obj === "string") this.style.innerHTML = this.obj
+            else this.style.innerHTML = `${this.obj}`
             this.appendChild(this.style);
         }
     }
