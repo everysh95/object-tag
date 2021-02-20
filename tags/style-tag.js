@@ -1,6 +1,6 @@
 import { DefineObject } from "./basic-tag.js";
 
-export class StyleObject extends DefineObject
+export class LinkObject extends DefineObject
 {
     async onPulled()
     {
@@ -16,4 +16,19 @@ export class StyleObject extends DefineObject
     }
 }
 
+export class StyleObject extends DefineObject
+{
+    async onPulled()
+    {
+        this.innerHTML = '';
+        if(this.obj)
+        {
+            this.style = document.createElement('style');
+            this.style.innerHTML = `${this.obj}`
+            this.appendChild(this.style);
+        }
+    }
+}
+
+customElements.define('link-object',LinkObject);
 customElements.define('style-object',StyleObject);
