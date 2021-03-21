@@ -18,7 +18,13 @@ export class LoadTemplate extends HTMLElement {
         if(!this.setUpAttribute()) return;
         if(!this.src) this.src = await findObject(this,this.ref);
         const templateText = await (await fetch(this.src)).text();
-        this.templateNode = new DOMParser().parseFromString(templateText,'text/html').querySelector('template');
+        const templateNode = new DOMParser().parseFromString(templateText,'text/html').querySelector('template');
+        if(!templateNode)
+        {
+            console.warn(`disable load ${this.src}(${this.ref})`)
+            return;
+        }
+        this.templateNode = document.importNode(templateNode.content,true);
         this.shadowRoot.innerHTML = '';
         this.shadowRoot.append(this.templateNode);
         this.shadowRoot.querySelectorAll("slot").forEach(
